@@ -1,0 +1,27 @@
+<div>
+    <h1>Fitness tracker</h1>
+    <input type="text" placeholder="Poids" data-bind="value: weight" />
+    <button data-bind="click: addToHistory">Ajouter</button>
+    <div data-bind="foreach: history">
+        <div data-bind="text: $data"></div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+
+<script>
+    class ViewModel {
+        weight;
+        history;
+        constructor() {
+            this.weight = ko.observable();
+            this.history = ko.observableArray();
+        }
+        addToHistory() {
+            this.history.push(this.weight());
+        }
+    }   
+    (function() {
+        const viewModel = new ViewModel();
+        ko.applyBindings(viewModel);
+    })();
+</script>
